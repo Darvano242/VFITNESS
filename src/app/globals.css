@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Brand tokens, mirroring docs/BRAND.md and tailwind.config.ts. Present as CSS
+ * variables so raw CSS and inline styles can reach them too.
+ */
+:root {
+  --vf-bg: #08090a;
+  --vf-bg2: #0c0e10;
+  --vf-surface: rgba(255, 255, 255, 0.035);
+  --vf-surface-hi: rgba(255, 255, 255, 0.06);
+  --vf-border: rgba(255, 255, 255, 0.08);
+  --vf-border-hi: rgba(255, 255, 255, 0.14);
+  --vf-text: #f5f6f7;
+  --vf-dim: #9aa0a6;
+  --vf-mute: #6b7177;
+  --vf-primary: #3d7dff;
+  --vf-primary-2: #6f5bff;
+  --vf-accent: #2dd4bf;
+  --vf-green: #22c55e;
+  --vf-gold: #f59e0b;
+  --vf-red: #f43f5e;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--vf-bg);
+    color: var(--vf-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Aurora backdrop. One fixed layer, never repeated per route. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -20% -10% auto -10%;
+    height: 58vh;
+    background:
+      radial-gradient(56% 66% at 20% 0%, rgba(61, 125, 255, 0.16), transparent 70%),
+      radial-gradient(48% 58% at 80% 5%, rgba(111, 91, 255, 0.13), transparent 72%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--vf-accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  .tnum { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
